@@ -1,12 +1,36 @@
 <template>
   <div class="recommend" >
-  推荐页面
+    <div class="recommend=content">
+      <div class="slider-wrapper">
+      </div>
+      <div class="recommend-list">
+        <h1 class="list-title">热门歌单推荐</h1>
+        <ul></ul>
+      </div>
+    </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-
-export default {}
+import {getRecommend} from 'api/recommend'
+import {ERR_OK} from 'api/config'
+console.log(11111111)
+export default {
+  created() {
+    this._getRecommend()
+  },
+  methods: {
+    _getRecommend() {
+      console.log(111)
+      getRecommend().then((res) => {
+        console.log(22)
+        if (res.code === ERR_OK) {
+          console.log(res.data.slider)
+        }
+      })
+    }
+  }
+}
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">

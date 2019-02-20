@@ -11,7 +11,8 @@
          ref="bgImage">
       <div class="play-wrapper"
            v-show="songs.length > 0">
-        <div class="play" ref="playBtn">
+        <div class="play"
+             ref="playBtn">
           <i class="icon-play"></i>
           <span class="text">随机播放全部</span>
         </div>
@@ -27,9 +28,11 @@
             class="list"
             ref="list">
       <div class="song-list-wrapper">
-        <song-list :songs="songs"></song-list>
+        <song-list @select="selectItem"
+                   :songs="songs"></song-list>
       </div>
-      <div class="loading-container" v-show="!songs.length">
+      <div class="loading-container"
+           v-show="!songs.length">
         <loading></loading>
       </div>
     </scroll>
@@ -40,6 +43,7 @@
 import Scroll from 'base/scroll/scroll'
 import SongList from 'base/song-list/song-list'
 import Loading from 'base/loading/loading'
+import {mapActions} from 'vuex'
 
 const RESERVED_HEIGHT = 40
 
@@ -83,7 +87,16 @@ export default {
     },
     scroll(pos) {
       this.scrollY = pos.y
-    }
+    },
+    selectItem(item, index) {
+      this.selectPlay({
+        list: this.songs,
+        index
+      })
+    },
+    ...mapActions([
+      'selectPlay'
+    ])
   },
   watch: {
     scrollY(newY) {

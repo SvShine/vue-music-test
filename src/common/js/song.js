@@ -55,4 +55,3 @@ function filterSinger(singer) {
   })
   return ret.join('/')
 }
-

@@ -10,7 +10,9 @@
          :style="bgStyle"
          ref="bgImage">
       <div class="play-wrapper"
-           v-show="songs.length > 0">
+           v-show="songs.length > 0"
+           ref="playBtn"
+           @click="random">
         <div class="play"
              ref="playBtn">
           <i class="icon-play"></i>
@@ -44,10 +46,12 @@ import Scroll from 'base/scroll/scroll'
 import SongList from 'base/song-list/song-list'
 import Loading from 'base/loading/loading'
 import {mapActions} from 'vuex'
+import {playlistMixin} from 'common/js/mixin'
 
 const RESERVED_HEIGHT = 40
 
 export default {
+  mixins: [playlistMixin],
   props: {
     bgImage: {
       type: String,
@@ -82,6 +86,11 @@ export default {
     this.$refs.list.$el.style.top = `${this.$refs.bgImage.clientHeight}px`
   },
   methods: {
+    handlePlaylist(playlist) {
+      const bottom = playlist.length > 0 ? '60px' : ''
+      this.$refs.list.$el.style.bottom = bottom
+      this.$refs.list.refresh()
+    },
     back() {
       this.$router.back()
     },
@@ -94,8 +103,14 @@ export default {
         index
       })
     },
+    random() {
+      this.randomPlay({
+        list: this.songs
+      })
+    },
     ...mapActions([
-      'selectPlay'
+      'selectPlay',
+      'randomPlay'
     ])
   },
   watch: {

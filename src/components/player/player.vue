@@ -278,7 +278,6 @@ export default {
       if (this.playlist.length === 1) {
         this.loop()
       } else {
-
         let index = this.currentIndex - 1
         if (index === -1) {
           index = this.playlist.length - 1

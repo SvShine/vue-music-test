@@ -1,4 +1,3 @@
-
 <template>
   <div class="song-list">
     <ul>
@@ -16,7 +15,6 @@
             {{getDesc(song)}}
           </p>
         </div>
-
       </li>
     </ul>
   </div>
@@ -35,17 +33,16 @@ export default {
     }
   },
   methods: {
-    getRankText(index) {
-      if (index > 2) {
-        return index + 1
-      }
-    },
     getRankCls(index) {
-      if (index < 3) {
-        // 前三名显示奖杯图片
+      if (index <= 2) {
         return `icon icon${index}`
       } else {
         return 'text'
+      }
+    },
+    getRankText(index) {
+      if (index > 2) {
+        return index + 1
       }
     },
     selectItem(item, index) {
@@ -55,7 +52,6 @@ export default {
       return `${song.singer} - ${song.album}`
     }
   }
-
 }
 </script>
 

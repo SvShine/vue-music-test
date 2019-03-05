@@ -22,8 +22,11 @@
     </div>
     <div class="search-result"
          v-show="query">
-      <suggest :query="query"></suggest>
+      <suggest :query="query"
+               @listScroll="blurInput"
+               @select="saveSearch"></suggest>
     </div>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -56,6 +59,12 @@ export default {
     },
     addQuery(query) {
       this.$refs.searchBox.setQuery(query)
+    },
+    blurInput() {
+      this.$refs.searchBox.blur()
+    },
+    saveSearch() }{
+      
     }
   },
   components: {

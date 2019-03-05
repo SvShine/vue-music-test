@@ -29,7 +29,7 @@ export default class Song {
     }
 
     return new Promise((resolve, reject) => {
-      getLyric(this.mid).then((res) => {
+      getLyric(this.id).then((res) => {
         if (res.retcode === ERR_OK) {
           this.lyric = Base64.decode(res.lyric)
           resolve(this.lyric)
@@ -42,7 +42,7 @@ export default class Song {
 }
 
 export function createSong(musicData, index) {
-  var audioSrc = index % 2 === 0 ? `http://dl.stream.qqmusic.qq.com/C400003iDFNR04D7QS.m4a?guid=5943444701&vkey=4497225EF9A1A46CAC7BE1C78E4C4F5084F60586E1C862A8F2E10F76764F995663200FB32701112ABA0C815856A77BEA4BE4F32733FE8CC7&uin=0&fromtag=38` : `http://dl.stream.qqmusic.qq.com/C4000007n7xV0iV1vq.m4a?guid=5943444701&vkey=4540F1D4AB0A8713D2DE0B04C27A6D24F7837C3A7A533550F95A8EC54DCD150BCE802C8A5135BFB1D6E20A30FACE5D4068E0087951562CCE&uin=0&fromtag=38`
+  var audioSrc = index % 2 === 0 ? `http://dl.stream.qqmusic.qq.com/C400003OUlho2HcRHC.m4a?guid=5943444701&vkey=F5DA040A36215B3DFD88B627956E9BE0667932B9031F6D08D84FEE1F4825B62A6109CFCFA44F06CCDF7D053C7B9716811BDFBC8A5D99ED15&uin=0&fromtag=38` : `http://dl.stream.qqmusic.qq.com/C400003Jcwf20vtS56.m4a?guid=5943444701&vkey=B24F43F5AD1D27356905CAF9D89A0D01831ECE0F490DB90BF9CE96E37CC8861525A3AAC6A2511E1F846A3BE18DB91F32BACA2687DC128244&uin=0&fromtag=38`
   // var audioSrc = Math.random() > 0.5 ? `http://isure.stream.qqmusic.qq.com/C400003w19oj0wrWLR.m4a?guid=5943444701&vkey=6505B31EC445A696ABB830FA01CA35EE8539FC8E0948386536A68DD642E12F809A4BF599A99217A984AD91944570A158C07640EEE0CFD2B2&uin=0&fromtag=38` : `http://isure.stream.qqmusic.qq.com/C400002MLS0D3zqTdU.m4a?guid=5943444701&vkey=64D0CE1D4328113981FF8CD9E9DD60200E05D9E353DFF9887AAE0D494C26F0EB0BADBAC69B99BDCDE5B16B78AF2C7DED741731148147AF81&uin=0&fromtag=38`
   return new Song({
     id: musicData.songid,
